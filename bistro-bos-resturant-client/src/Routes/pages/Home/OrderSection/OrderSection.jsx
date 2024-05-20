@@ -27,9 +27,6 @@ const OrderSection = () => {
                 modules={[Pagination]}
                 className="mySwiper mb-24"
                 breakpoints={{
-                    640: {
-                        slidesPerView: 1,
-                    },
                     768: {
                         slidesPerView: 2,
                     },

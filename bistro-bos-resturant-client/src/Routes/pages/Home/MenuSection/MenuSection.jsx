@@ -28,7 +28,7 @@ const MenuSection = () => {
                 }
             </div>
             <div className="flex items-center justify-center py-12">
-                <Link className="">
+                <Link to={'/menu'}>
                     <button className="px-6 mx-auto py-3 rounded-lg hover:bg-base-200 duration-150 text-[20px] font-medium border-0 border-b-[#1F2937] border-b-4">View Full Menu</button>
                 </Link>
             </div>
