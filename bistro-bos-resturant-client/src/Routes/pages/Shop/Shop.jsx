@@ -6,9 +6,21 @@ import 'react-tabs/style/react-tabs.css';
 import './shop.css'
 import useMenu from '../../../hooks/useMenu';
 import MenuTab from './MenuTab';
+import { useParams } from 'react-router-dom';
 
 const Shop = () => {
-    const [tabIndex, setTabIndex] = useState(0);
+    let initialIndex;
+    const categories = ['salad', 'pizza', 'soup', 'dessert', 'drinks'];
+    const { title } = useParams();
+    if (!title) {
+        initialIndex = 0;
+    }
+    else {
+        initialIndex = categories.indexOf(title);
+    }
+    const [tabIndex, setTabIndex] = useState(initialIndex);
+    console.log(initialIndex)
+
     const [menu] = useMenu()
     const drinks = menu.filter(item => item.category === 'drinks')
     const dessert = menu.filter(item => item.category === 'dessert')
@@ -20,15 +32,17 @@ const Shop = () => {
     return (
         <div>
             <SectionBanner img={pageBanner} title={'Our shops'} message={'Would you like to try a dish?'} />
-            <div className='py-10'>
-                <Tabs selectedIndex={tabIndex} onSelect={(index) => setTabIndex(index)}>
-                    <TabList>
-                        <Tab>salad</Tab>
-                        <Tab>pizza</Tab>
-                        <Tab>soup</Tab>
-                        <Tab>dessert</Tab>
-                        <Tab>drinks</Tab>
-                    </TabList>
+            <div className='py-10 '>
+                <Tabs defaultIndex={tabIndex} onSelect={(index) => setTabIndex(index)}>
+                    <div className='overflow-x-auto scrollbar-hide'>
+                        <TabList>
+                            <Tab>salad</Tab>
+                            <Tab>pizza</Tab>
+                            <Tab>soup</Tab>
+                            <Tab>dessert</Tab>
+                            <Tab>drinks</Tab>
+                        </TabList>
+                    </div>
                     <TabPanel>
                         <MenuTab items={salad} />
                     </TabPanel>
