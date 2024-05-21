@@ -1,0 +1,18 @@
+.react-tabs__tab{
+    color: #151515;
+    font-size: 24px;
+    text-transform: uppercase;
+    
+}
+.react-tabs__tab--selected{
+    color: #BB8506;
+    border: none;
+    text-decoration: underline;
+    text-underline-offset: 7px;
+}
+.react-tabs__tab-list{
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

@@ -30,7 +30,7 @@ const TodayOffer = () => {
                         </MenuItem>)
                     }
                 </div>
-                <Link to={'/'} className="flex items-center justify-center">
+                <Link to={'/shop'} className="flex items-center justify-center">
                     <button className="px-8 py-3 mx-auto border-b-4 hover:bg-slate-300 font-semibold duration-200 border-b-black rounded-lg">ORDER YOUR FAVOURITE FOOD</button>
                 </Link>
             </div>
@@ -43,7 +43,7 @@ const TodayOffer = () => {
                         </MenuItem>)
                     }
                 </div>
-                <Link to={'/'} className="flex items-center justify-center">
+                <Link to={'/shop'} className="flex items-center justify-center">
                     <button className="px-8 py-3 mx-auto border-b-4 hover:bg-slate-300 font-semibold duration-200 border-b-black rounded-lg">ORDER YOUR FAVOURITE FOOD</button>
                 </Link>
             </div>
@@ -56,7 +56,7 @@ const TodayOffer = () => {
                         </MenuItem>)
                     }
                 </div>
-                <Link to={'/'} className="flex items-center justify-center">
+                <Link to={'/shop'} className="flex items-center justify-center">
                     <button className="px-8 py-3 mx-auto border-b-4 hover:bg-slate-300 font-semibold duration-200 border-b-black rounded-lg">ORDER YOUR FAVOURITE FOOD</button>
                 </Link>
             </div>
@@ -69,7 +69,7 @@ const TodayOffer = () => {
                         </MenuItem>)
                     }
                 </div>
-                <Link to={'/'} className="flex items-center justify-center">
+                <Link to={'/shop'} className="flex items-center justify-center">
                     <button className="px-8 py-3 mx-auto border-b-4 hover:bg-slate-300 font-semibold duration-200 border-b-black rounded-lg">ORDER YOUR FAVOURITE FOOD</button>
                 </Link>
             </div>
@@ -82,7 +82,7 @@ const TodayOffer = () => {
                         </MenuItem>)
                     }
                 </div>
-                <Link to={'/'} className="flex items-center justify-center">
+                <Link to={'/shop'} className="flex items-center justify-center">
                     <button className="px-8 py-3 mx-auto border-b-4 hover:bg-slate-300 font-semibold duration-200 border-b-black rounded-lg">ORDER YOUR FAVOURITE FOOD</button>
                 </Link>
             </div>
