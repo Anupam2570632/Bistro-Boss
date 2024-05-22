@@ -7,7 +7,7 @@ const NavBar = () => {
         <li><NavLink to={'/contact'}>CONTACT US</NavLink></li>
         <li><NavLink to={'/dashboard'}>DASHBOARD</NavLink></li>
         <li><NavLink to={'/menu'}>OUR MENU</NavLink></li>
-        <li><NavLink to={'/shop'}>OUR SHOPS</NavLink></li>
+        <li><NavLink to={'/shop/salad'}>OUR SHOPS</NavLink></li>
     </>
     return (
         <div className="fixed top-0 z-10 w-full m-0 p-0 bg-black bg-opacity-40">
@@ -31,11 +31,15 @@ const NavBar = () => {
                         {links}
                     </ul>
                     <div className="navbar-end">
-                        <a className="btn">Button</a>
+                        <Link to={'/login'}>
+                            <button className="px-5 py-3 bg-transparent text-xl font-bold text-white">LogIn</button>
+                        </Link>
                     </div>
                 </div>
                 <div className="navbar-end lg:hidden">
-                    <a className="btn">Button</a>
+                    <Link to={'/login'}>
+                        <button className="px-5 py-3 bg-transparent text-xl font-bold text-white">LogIn</button>
+                    </Link>
                 </div>
             </div>
         </div>
