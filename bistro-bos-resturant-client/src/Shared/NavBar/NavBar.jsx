@@ -1,7 +1,17 @@
 import { Link, NavLink } from "react-router-dom";
 import './NavBar.css'
+import { useContext } from "react";
+import { AuthContext } from "../../Provider/AuthProvider/AuthProvider";
 
 const NavBar = () => {
+    const { user, logOut } = useContext(AuthContext)
+
+    const handleLogOut = () => {
+        logOut()
+            .then()
+            .catch()
+    }
+
     const links = <>
         <li><NavLink to={'/'}>HOME</NavLink></li>
         <li><NavLink to={'/contact'}>CONTACT US</NavLink></li>
@@ -31,15 +41,43 @@ const NavBar = () => {
                         {links}
                     </ul>
                     <div className="navbar-end">
-                        <Link to={'/login'}>
-                            <button className="px-5 py-3 bg-transparent text-xl font-bold text-white">LogIn</button>
-                        </Link>
+                        {
+                            user
+                                ?
+                                <div className="flex items-center gap-2">
+
+                                    <button onClick={handleLogOut} className="px-5 py-3 bg-transparent text-xl font-bold text-white">Sign Out</button>
+                                    <div className="avatar">
+                                        <div className="w-10 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+                                            <img src={user.photoURL} />
+                                        </div>
+                                    </div>
+                                </div>
+                                :
+                                <Link to={'/login'}>
+                                    <button className="px-5 py-3 bg-transparent text-xl font-bold text-white">LogIn</button>
+                                </Link>
+                        }
                     </div>
                 </div>
                 <div className="navbar-end lg:hidden">
-                    <Link to={'/login'}>
-                        <button className="px-5 py-3 bg-transparent text-xl font-bold text-white">LogIn</button>
-                    </Link>
+                    {
+                        user
+                            ?
+                            <div className="flex items-center gap-2">
+
+                                <button onClick={handleLogOut} className="px-5 py-3 bg-transparent text-xl font-bold text-white">Sign Out</button>
+                                <div className="avatar">
+                                    <div className="w-10 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+                                        <img src={user.photoURL} />
+                                    </div>
+                                </div>
+                            </div>
+                            :
+                            <Link to={'/login'}>
+                                <button className="px-5 py-3 bg-transparent text-xl font-bold text-white">LogIn</button>
+                            </Link>
+                    }
                 </div>
             </div>
         </div>
