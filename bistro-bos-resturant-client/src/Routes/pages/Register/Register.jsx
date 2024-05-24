@@ -1,44 +1,55 @@
 import { useForm } from 'react-hook-form';
 import Swal from 'sweetalert2'
+import axios from 'axios'
 import loginBg from '../../../assets/reservation/wood-grain-pattern-gray1x.png'
 import authenticationImg from '../../../assets/others/authentication2.png'
 import { Link, useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 import { AuthContext } from '../../../Provider/AuthProvider/AuthProvider';
+const image_hosting_key = import.meta.env.VITE_imgbb_hosting_key;
+const image_hosting_url = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 
 const Register = () => {
     const { createUser, logOut, updateUserProfile } = useContext(AuthContext)
     const navigate = useNavigate()
 
     const { register, handleSubmit, formState: { errors } } = useForm();
-    const onSubmit = (data) => {
+    const onSubmit = async (data) => {
         console.log(data)
+        console.log(data.photoURL[0])
         const email = data.email;
         const password = data.password;
         const displayName = data.name;
-        const photoURL = data.photoURL;
-        createUser(email, password)
-            .then(result => {
+        const imgFile = { image: data.photoURL[0] };
 
-                updateUserProfile(displayName, photoURL)
-                    .then(() => console.log('updated succesfully'))
+        const res = await axios.post(image_hosting_url, imgFile, {
+            headers: {
+                'content-type': 'multipart/form-data'
+            }
+        })
+        if (res.data.success) {
+            const photoURL = res.data.data.display_url
+            createUser(email, password)
+                .then(result => {
+                    updateUserProfile(displayName, photoURL)
 
-                logOut()
-                    .then()
-                    .catch()
-                navigate('/login')
-                console.log(result.user)
-                Swal.fire({
-                    position: "top-end",
-                    icon: "success",
-                    title: "Account created successfully!",
-                    showConfirmButton: false,
-                    timer: 1500
-                });
-            })
-            .catch(err => {
-                console.error(err)
-            })
+                    logOut()
+                    
+                    navigate('/login')
+                    console.log(result.user)
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: "Account created successfully!",
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                })
+                .catch(err => {
+                    console.error(err)
+                })
+
+        }
     };
 
 
