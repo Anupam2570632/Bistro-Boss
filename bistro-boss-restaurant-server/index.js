@@ -23,10 +23,17 @@ async function run() {
     try {
 
         const menuCollection = client.db('BISTRO_BOSS').collection('menu')
+        const cartCollection = client.db('BISTRO_BOSS').collection('carts')
 
         app.get('/menu', async (req, res) => {
             const result = await menuCollection.find().toArray();
             res.send(result)
+        })
+
+        app.post('/carts', async (req, res) => {
+            const cart = req.body;
+            const result = await cartCollection.insertOne(cart)
+            res.send(result);
         })
 
         // Connect the client to the server	(optional starting in v4.7)

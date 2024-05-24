@@ -19,7 +19,6 @@ const Shop = () => {
         initialIndex = categories.indexOf(title);
     }
     const [tabIndex, setTabIndex] = useState(initialIndex);
-    console.log(initialIndex)
 
     const [menu] = useMenu()
     const drinks = menu.filter(item => item.category === 'drinks')

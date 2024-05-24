@@ -47,9 +47,19 @@ const NavBar = () => {
                                 <div className="flex items-center gap-2">
 
                                     <button onClick={handleLogOut} className="px-5 py-3 bg-transparent text-xl font-bold text-white">Sign Out</button>
-                                    <div className="avatar">
-                                        <div className="w-10 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
-                                            <img src={user.photoURL} />
+                                    <div className="dropdown dropdown-end">
+                                        <div tabIndex={0} role="button">
+                                            <div className="avatar">
+                                                <div className="w-10 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+                                                    <img src={user.photoURL} />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div tabIndex={0} className="card compact dropdown-content z-[1] shadow bg-base-100 rounded-box w-64">
+                                            <div className="card-body">
+                                                <h3 className="card-title">{user.displayName}</h3>
+                                                <p>{user.email}</p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -67,9 +77,19 @@ const NavBar = () => {
                             <div className="flex items-center gap-2">
 
                                 <button onClick={handleLogOut} className="px-5 py-3 bg-transparent text-xl font-bold text-white">Sign Out</button>
-                                <div className="avatar">
-                                    <div className="w-10 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
-                                        <img src={user.photoURL} />
+                                <div className="dropdown dropdown-end">
+                                    <div tabIndex={0} role="button">
+                                        <div className="avatar">
+                                            <div className="w-10 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+                                                <img src={user.photoURL} />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div tabIndex={0} className="card compact dropdown-content z-[1] shadow bg-base-100 rounded-box w-64">
+                                        <div className="card-body">
+                                            <h3 className="card-title">{user.displayName}</h3>
+                                            <p>{user.email}</p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

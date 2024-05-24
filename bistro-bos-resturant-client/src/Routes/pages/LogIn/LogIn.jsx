@@ -4,12 +4,13 @@ import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from 'react-s
 import { useContext, useEffect, useRef, useState } from 'react';
 import { AuthContext } from '../../../Provider/AuthProvider/AuthProvider';
 import { useForm } from 'react-hook-form';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
 
 const LogIn = () => {
     const navigate = useNavigate()
+    const location = useLocation()
     const [disabled, setDisabled] = useState(true)
     const captchaRef = useRef()
 
@@ -30,14 +31,14 @@ const LogIn = () => {
                 showConfirmButton: false,
                 timer: 1500
               });
-              navigate('/')
+              navigate(location?.state ? location.state : '/');
         })
     };
 
     const handleGoogleLogIn = () => {
         googleLogin()
             .then(result => {
-                navigate('/')
+                navigate(location?.state ? location.state : '/');
                 Swal.fire({
                     position: "top-end",
                     icon: "success",
