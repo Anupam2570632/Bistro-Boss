@@ -77,7 +77,7 @@ const ManageItems = () => {
                                 ${cart.price}
                             </td>
                             <th>
-                                <button onClick={() => handleDelete(cart._id)} className="bg-[#D1A054] p-3 rounded-md text-white font-bold text-xl hover:bg-red-900 duration-200"><FaEdit /></button>
+                                <button className="bg-[#D1A054] p-3 rounded-md text-white font-bold text-xl hover:bg-red-900 duration-200"><FaEdit /></button>
                             </th>
                             <th>
                                 <button onClick={() => handleDelete(cart._id)} className="bg-[#B91C1C] p-3 rounded-md text-white font-bold text-xl hover:bg-red-900 duration-200"><FaTrashCan /></button>
