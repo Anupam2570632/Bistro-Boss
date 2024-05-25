@@ -1,4 +1,4 @@
-import { FaCartShopping } from "react-icons/fa6";
+import { FaBars, FaCartShopping } from "react-icons/fa6";
 import { Link, NavLink } from "react-router-dom";
 
 const SideBar = () => {
@@ -13,7 +13,7 @@ const SideBar = () => {
         <div className="drawer lg:drawer-open">
             <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
             <div className="drawer-content flex flex-col lg:hidden ">
-                <label htmlFor="my-drawer-2" className="btn btn-primary drawer-button lg:hidden">Open drawer</label>
+                <label htmlFor="my-drawer-2" className="btn bg-[#D1A054] w-fit drawer-button lg:hidden"><FaBars/></label>
             </div>
             <div className="drawer-side ">
                 <label htmlFor="my-drawer-2" aria-label="c  lose sidebar" className="drawer-overlay"></label>
