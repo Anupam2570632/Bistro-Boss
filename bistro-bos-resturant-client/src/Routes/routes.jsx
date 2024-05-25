@@ -9,6 +9,9 @@ import Register from "./pages/Register/Register";
 import Dashboard from "./pages/Dashboard/Dashboard/Dashboard";
 import DashBoardHome from "./pages/Dashboard/DashBoardHome/DashBoardHome";
 import MyCart from "./pages/Dashboard/MyCart/MyCart";
+import PrivateRoute from "./PrivateRoute";
+import ManageItems from "./pages/Dashboard/ManageItems/ManageItems";
+import AddItem from "./pages/Dashboard/AddItem/AddItem";
 
 const router = createBrowserRouter([
     {
@@ -44,11 +47,19 @@ const router = createBrowserRouter([
         children: [
             {
                 index: 'dashboard',
-                element: <DashBoardHome />
+                element: <PrivateRoute><DashBoardHome /></PrivateRoute>
             },
             {
                 path: 'myCart',
                 element: <MyCart />
+            },
+            {
+                path:'manageItem',
+                element:<ManageItems/>
+            },
+            {
+                path:'addItem',
+                element:<AddItem/>
             }
         ]
     }

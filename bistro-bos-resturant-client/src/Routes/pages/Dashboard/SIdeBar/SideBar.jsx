@@ -1,8 +1,9 @@
-import { FaBars, FaCalendar, FaCartShopping, FaEnvelope, FaHouse, FaRankingStar, FaRegCalendar, FaRegMoneyBill1, FaShop } from "react-icons/fa6";
+import { FaBars, FaBook, FaCalendar, FaCartShopping, FaEnvelope, FaHouse, FaRankingStar, FaRegCalendar, FaRegMoneyBill1, FaShop, FaUser, FaUserGroup, FaUtensils } from "react-icons/fa6";
 import { Link, NavLink } from "react-router-dom";
 import './sidebar.css'
 
 const SideBar = () => {
+    const admin = true
 
     const sideLinks = <>
         <li className="text-black p-4">
@@ -11,17 +12,31 @@ const SideBar = () => {
                 <h1 className="tracking-widest">RESTAURANT</h1>
             </Link>
         </li>
-        <li className="text-black"><NavLink end to={'/dashboard'}><FaHouse  className="text-2xl"/> User Home</NavLink></li>
-        <li className="text-black"><NavLink end to={'myCart'}><FaCartShopping  className="text-2xl"/> My Cart</NavLink></li>
-        <li className="text-black"><NavLink end to={'reservation'}><FaCalendar/> Reservation</NavLink></li>
-        <li className="text-black"><NavLink end to={'reservation'}><FaRegMoneyBill1 className="text-2xl"/> Payment History</NavLink></li>
-        <li className="text-black"><NavLink end to={'review'}><FaRankingStar className="text-2xl"/> add review</NavLink></li>
-        <li className="text-black"><NavLink end to={'review'}><FaRegCalendar className="text-2xl"/> My Booking</NavLink></li>
+        {
+            admin ?
+                <>
+                    <li className="text-black"><NavLink end to={'/dashboard'}><FaHouse className="text-2xl" /> Admin Home</NavLink></li>
+                    <li className="text-black"><NavLink end to={'addItem'}><FaUtensils className="text-2xl" /> Add Items</NavLink></li>
+                    <li className="text-black"><NavLink end to={'manageItem'}><FaBars /> Manage Items</NavLink></li>
+                    <li className="text-black"><NavLink end to={'reservation'}><FaBook className="text-2xl" /> Manage Bookings</NavLink></li>
+                    <li className="text-black"><NavLink end to={'review'}><FaUserGroup className="text-2xl" /> All Users</NavLink></li>
+
+                </>
+                :
+                <>
+                    <li className="text-black"><NavLink end to={'/dashboard'}><FaHouse className="text-2xl" /> User Home</NavLink></li>
+                    <li className="text-black"><NavLink end to={'myCart'}><FaCartShopping className="text-2xl" /> My Cart</NavLink></li>
+                    <li className="text-black"><NavLink end to={'reservation'}><FaCalendar /> Reservation</NavLink></li>
+                    <li className="text-black"><NavLink end to={'reservation'}><FaRegMoneyBill1 className="text-2xl" /> Payment History</NavLink></li>
+                    <li className="text-black"><NavLink end to={'review'}><FaRankingStar className="text-2xl" /> add review</NavLink></li>
+                    <li className="text-black"><NavLink end to={'review'}><FaRegCalendar className="text-2xl" /> My Booking</NavLink></li>
+                </>
+        }
         <div className="divider"></div>
-        <li className="text-black"><NavLink end to={'/'}><FaHouse className="text-2xl"/> Home</NavLink></li>
-        <li className="text-black"><NavLink end to={'/menu'}><FaBars className="text-2xl"/> Menu</NavLink></li>
-        <li className="text-black"><NavLink end to={'/shop/salad'}><FaShop className="text-2xl"/> Shop</NavLink></li>
-        <li className="text-black"><NavLink end to={'/contact'}><FaEnvelope className="text-2xl"/> Contact</NavLink></li>
+        <li className="text-black"><NavLink end to={'/'}><FaHouse className="text-2xl" /> Home</NavLink></li>
+        <li className="text-black"><NavLink end to={'/menu'}><FaBars className="text-2xl" /> Menu</NavLink></li>
+        <li className="text-black"><NavLink end to={'/shop/salad'}><FaShop className="text-2xl" /> Shop</NavLink></li>
+        <li className="text-black"><NavLink end to={'/contact'}><FaEnvelope className="text-2xl" /> Contact</NavLink></li>
 
     </>
 
