@@ -6,10 +6,12 @@ import authenticationImg from '../../../assets/others/authentication2.png'
 import { Link, useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 import { AuthContext } from '../../../Provider/AuthProvider/AuthProvider';
+import useAxiosPublic from '../../../hooks/useAxiosPublic';
 const image_hosting_key = import.meta.env.VITE_imgbb_hosting_key;
 const image_hosting_url = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 
 const Register = () => {
+    const axiosPublic = useAxiosPublic()
     const { createUser, logOut, updateUserProfile } = useContext(AuthContext)
     const navigate = useNavigate()
 
@@ -30,20 +32,31 @@ const Register = () => {
         if (res.data.success) {
             const photoURL = res.data.data.display_url
             createUser(email, password)
-                .then(result => {
+                .then((result) => {
+                    console.log(result)
                     updateUserProfile(displayName, photoURL)
+                        .then(() => {
+                            const userInfo = {
+                                name: data.name,
+                                email: data.email
+                            }
+                            axiosPublic.post('/users', userInfo)
+                                .then(res => {
 
-                    logOut()
-                    
-                    navigate('/login')
-                    console.log(result.user)
-                    Swal.fire({
-                        position: "top-end",
-                        icon: "success",
-                        title: "Account created successfully!",
-                        showConfirmButton: false,
-                        timer: 1500
-                    });
+                                    if (res.data.insertedId) {
+                                        logOut()
+
+                                        Swal.fire({
+                                            position: "top-end",
+                                            icon: "success",
+                                            title: "Account created successfully!",
+                                            showConfirmButton: false,
+                                            timer: 1500
+                                        });
+                                        navigate('/login')
+                                    }
+                                })
+                        })
                 })
                 .catch(err => {
                     console.error(err)

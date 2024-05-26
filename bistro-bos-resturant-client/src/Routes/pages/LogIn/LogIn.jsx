@@ -6,9 +6,11 @@ import { AuthContext } from '../../../Provider/AuthProvider/AuthProvider';
 import { useForm } from 'react-hook-form';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import useAxiosPublic from '../../../hooks/useAxiosPublic';
 
 
 const LogIn = () => {
+    const axiosPublic = useAxiosPublic()
     const navigate = useNavigate()
     const location = useLocation()
     const [disabled, setDisabled] = useState(true)
@@ -20,32 +22,50 @@ const LogIn = () => {
 
     const onSubmit = (data) => {
         const email = data.email;
-        const password= data.password;
+        const password = data.password;
         logInWithEmailAndPassword(email, password)
-        .then(result=>{
-            console.log(result.user)
-            Swal.fire({
-                position: "top-end",
-                icon: "success",
-                title: "User logged In successfully!",
-                showConfirmButton: false,
-                timer: 1500
-              });
-              navigate(location?.state ? location.state : '/');
-        })
-    };
-
-    const handleGoogleLogIn = () => {
-        googleLogin()
             .then(result => {
-                navigate(location?.state ? location.state : '/');
+                console.log(result.user)
                 Swal.fire({
                     position: "top-end",
                     icon: "success",
                     title: "User logged In successfully!",
                     showConfirmButton: false,
                     timer: 1500
-                  });
+                });
+                navigate(location?.state ? location.state : '/');
+            })
+            .catch(err => {
+                Swal.fire({
+                    icon: 'error',
+                    title: "Oops...",
+                    text: err.message,
+                });
+            })
+    };
+
+    const handleGoogleLogIn = () => {
+        googleLogin()
+            .then(result => {
+
+                const userInfo = {
+                    name: result.user?.displayName,
+                    email: result.user?.email
+                }
+                axiosPublic.post('/users', userInfo)
+                    .then(res => {
+                        if (res.data.insertedId) {
+                            Swal.fire({
+                                position: "top-end",
+                                icon: "success",
+                                title: "User logged In successfully!",
+                                showConfirmButton: false,
+                                timer: 1500
+                            });
+                        }
+                        navigate(location?.state ? location.state : '/');
+                    })
+
                 console.log(result.user)
             })
             .catch(error => console.error(error))

@@ -14,7 +14,7 @@ const SideBar = () => {
                     <li className="text-black"><NavLink end to={'addItem'}><FaUtensils className="text-2xl" /> Add Items</NavLink></li>
                     <li className="text-black"><NavLink end to={'manageItem'}><FaBars /> Manage Items</NavLink></li>
                     <li className="text-black"><NavLink end to={'reservation'}><FaBook className="text-2xl" /> Manage Bookings</NavLink></li>
-                    <li className="text-black"><NavLink end to={'review'}><FaUserGroup className="text-2xl" /> All Users</NavLink></li>
+                    <li className="text-black"><NavLink end to={'users'}><FaUserGroup className="text-2xl" /> All Users</NavLink></li>
 
                 </>
                 :
