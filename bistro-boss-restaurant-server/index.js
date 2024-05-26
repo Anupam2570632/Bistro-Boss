@@ -26,6 +26,19 @@ async function run() {
         const cartCollection = client.db('BISTRO_BOSS').collection('carts')
         const userCollection = client.db('BISTRO_BOSS').collection('users')
 
+
+        app.get('/users/admin/:email', async (req, res) => {
+            const email = req.params.email;
+
+            const query = { email: email };
+            const user = await userCollection.findOne(query);
+            let admin = false;
+            if (user) {
+                admin = user?.role === 'admin';
+            }
+            res.send({ admin });
+        })
+
         app.get('/menu', async (req, res) => {
             const result = await menuCollection.find().toArray();
             res.send(result)

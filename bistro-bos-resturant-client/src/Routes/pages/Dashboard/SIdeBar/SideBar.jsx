@@ -1,14 +1,15 @@
 import { FaBars, FaBook, FaCalendar, FaCartShopping, FaEnvelope, FaHouse, FaRankingStar, FaRegCalendar, FaRegMoneyBill1, FaShop, FaUser, FaUserGroup, FaUtensils } from "react-icons/fa6";
 import { NavLink } from "react-router-dom";
 import './sidebar.css'
+import useAdmin from "../../../../hooks/useAdmin";
 
 const SideBar = () => {
-    const admin = true;
+    const [isAdmin] = useAdmin()
 
     const sideLinks = <>
 
         {
-            admin ?
+            isAdmin ?
                 <>
                     <li className="text-black"><NavLink end to={'/dashboard'}><FaHouse className="text-2xl" /> Admin Home</NavLink></li>
                     <li className="text-black"><NavLink end to={'addItem'}><FaUtensils className="text-2xl" /> Add Items</NavLink></li>

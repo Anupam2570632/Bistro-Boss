@@ -1,10 +1,11 @@
 .active {
-color: #EEFF25;
+  color: #eeff25;
 }
-li{
-    color: white;
-    text-wrap: nowrap;
-    margin-right: 18px;
-    font-size: 16px;
-    font-weight: 800;
+li {
+  color: white;
+  text-wrap: nowrap;
+  margin-right: 18px;
+  font-size: 16px;
+  font-weight: 800;
 }
+
