@@ -42,6 +42,7 @@ const AddItem = () => {
             const res = await axiosSecure.post('/menu', menu)
             if (res.data.insertedId) {
                 reset()
+                setImage('')
                 Swal.fire({
                     position: "top-end",
                     icon: "success",
@@ -96,14 +97,8 @@ const AddItem = () => {
                         </div>
                         <textarea {...register('recipe', { required: true })} className="textarea textarea-bordered h-24" placeholder="Recipe Details"></textarea>
                     </label>
-                    <div className="flex items-end gap-4">
-                        <label className="form-control w-full max-w-xs">
-                            <div className="label">
-                                <span className="label-text">No file chosen</span>
-                            </div>
-                            <input {...register('image', { required: true })} onChange={handleChangeImage} type="file" className="file-input file-input-bordered w-full max-w-xs" />
-                        </label>
-                        <div>
+                    <label className="form-control w-full max-w-xs">
+                        <div className="label">
                             {
                                 image ?
                                     <img className="h-16 rounded-md" src={URL.createObjectURL(image)} alt="select" />
@@ -111,13 +106,14 @@ const AddItem = () => {
                                     <LuImagePlus className="text-[64px]" />
                             }
                         </div>
-                    </div>
+                        <input {...register('image', { required: true })} onChange={handleChangeImage} type="file" className="file-input file-input-bordered w-full max-w-xs" />
+                    </label>
                     <button type="submit" style={{ background: "linear-gradient(90deg, #835D23 0%, #B58130 100%)" }} className='flex gap-1 px-6 text-[20px] py-3 text-white items-center font-bold'>
                         Add Item <FaUtensils />
                     </button>
                 </form>
             </div>
-        </div>
+        </div >
     );
 };
 

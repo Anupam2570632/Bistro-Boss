@@ -27,7 +27,8 @@ const MyCart = () => {
                     Swal.fire({
                         title: "Deleted!",
                         text: "Your file has been deleted.",
-                        icon: "success"
+                        icon: "success",
+                        timer:1500
                     });
                 }
             }

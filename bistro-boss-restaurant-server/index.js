@@ -24,6 +24,7 @@ async function run() {
 
         const menuCollection = client.db('BISTRO_BOSS').collection('menu')
         const cartCollection = client.db('BISTRO_BOSS').collection('carts')
+        const userCollection = client.db('BISTRO_BOSS').collection('users')
 
         app.get('/menu', async (req, res) => {
             const result = await menuCollection.find().toArray();
@@ -60,6 +61,12 @@ async function run() {
             const query = { _id: new ObjectId(id) }
             const result = await cartCollection.deleteOne(query);
             res.send(result)
+        })
+
+        app.post('/users', async (req, res) => {
+            const user = req.body;
+            const result = await userCollection.insertOne(user);
+            res.send(result);
         })
 
         // Connect the client to the server	(optional starting in v4.7)

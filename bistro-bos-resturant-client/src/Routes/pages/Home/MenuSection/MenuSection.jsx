@@ -5,7 +5,10 @@ import { Link } from "react-router-dom";
 import useMenu from "../../../../hooks/useMenu";
 
 const MenuSection = () => {
-    const [menu] = useMenu()
+    const [menu, refetch, isLoading] = useMenu()
+    if (isLoading) {
+        return <>loading...</>
+    }
     return (
         <section className="w-11/12 md:w-4/5 mx-auto max-w-[1500px] py-14">
             <SectionTitle

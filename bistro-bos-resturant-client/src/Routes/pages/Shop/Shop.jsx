@@ -20,7 +20,10 @@ const Shop = () => {
     }
     const [tabIndex, setTabIndex] = useState(initialIndex);
 
-    const [menu] = useMenu()
+    const [menu,refetch, isLoading] = useMenu()
+    if (isLoading) {
+        return <>loading...</>
+    }
     const drinks = menu.filter(item => item.category === 'drinks')
     const dessert = menu.filter(item => item.category === 'dessert')
     const pizza = menu.filter(item => item.category === 'pizza')

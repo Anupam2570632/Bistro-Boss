@@ -11,7 +11,11 @@ import MenuCategory from "./MenuCategory/MenuCategory";
 
 
 const TodayOffer = () => {
-    const [menu] = useMenu()
+    const [menu,refetch, isLoading] = useMenu()
+
+    if (isLoading) {
+        return <>loading...</>
+    }
 
     const todaysOffer = menu.filter(item => item.category === 'offered')
     const dessert = menu.filter(item => item.category === 'dessert')

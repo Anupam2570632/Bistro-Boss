@@ -12,6 +12,9 @@ import MyCart from "./pages/Dashboard/MyCart/MyCart";
 import PrivateRoute from "./PrivateRoute";
 import ManageItems from "./pages/Dashboard/ManageItems/ManageItems";
 import AddItem from "./pages/Dashboard/AddItem/AddItem";
+import AdminHome from "./pages/Dashboard/AdminHome/AdminHome";
+
+const admin = true;
 
 const router = createBrowserRouter([
     {
@@ -47,19 +50,19 @@ const router = createBrowserRouter([
         children: [
             {
                 index: 'dashboard',
-                element: <PrivateRoute><DashBoardHome /></PrivateRoute>
+                element: <PrivateRoute>{admin ? <AdminHome /> : <DashBoardHome />}</PrivateRoute>
             },
             {
                 path: 'myCart',
                 element: <MyCart />
             },
             {
-                path:'manageItem',
-                element:<ManageItems/>
+                path: 'manageItem',
+                element: <ManageItems />
             },
             {
-                path:'addItem',
-                element:<AddItem/>
+                path: 'addItem',
+                element: <AddItem />
             }
         ]
     }

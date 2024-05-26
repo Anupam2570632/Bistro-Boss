@@ -1,17 +1,12 @@
 import { FaBars, FaBook, FaCalendar, FaCartShopping, FaEnvelope, FaHouse, FaRankingStar, FaRegCalendar, FaRegMoneyBill1, FaShop, FaUser, FaUserGroup, FaUtensils } from "react-icons/fa6";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import './sidebar.css'
 
 const SideBar = () => {
-    const admin = true
+    const admin = true;
 
     const sideLinks = <>
-        <li className="text-black p-4">
-            <Link to={'/'} className="flex flex-col items-start p-0 text-start">
-                <h2 className="text-[18px] font-bold">BISTRO BOSS</h2>
-                <h1 className="tracking-widest">RESTAURANT</h1>
-            </Link>
-        </li>
+
         {
             admin ?
                 <>
@@ -49,6 +44,11 @@ const SideBar = () => {
             <div className="drawer-side ">
                 <label htmlFor="my-drawer-2" aria-label="c  lose sidebar" className="drawer-overlay"></label>
                 <ul className="menu p-4 w-80 min-h-full bg-[#D1A054] space-y-2">
+                    <div className="flex flex-col items-start p-4 text-start">
+                        <h2 className="text-[18px] font-bold">BISTRO BOSS</h2>
+                        <h1 className="tracking-widest">RESTAURANT</h1>
+                    </div>
+
                     {sideLinks}
                 </ul>
 

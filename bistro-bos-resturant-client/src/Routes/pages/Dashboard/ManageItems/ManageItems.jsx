@@ -6,9 +6,12 @@ import { FaEdit } from "react-icons/fa";
 import useMenu from "../../../../hooks/useMenu";
 
 const ManageItems = () => {
-    const [menu, refetch] = useMenu()
+    const [menu, refetch, isPending] = useMenu()
     const axiosSecure = useAxiosSecure()
 
+    if(isPending){
+        return <>LOadin.....</>
+    }
 
     const handleDelete = async (id) => {
         Swal.fire({
@@ -28,7 +31,8 @@ const ManageItems = () => {
                     Swal.fire({
                         title: "Deleted!",
                         text: "Your file has been deleted.",
-                        icon: "success"
+                        icon: "success",
+                        timer: 1500
                     });
                 }
             }
@@ -42,7 +46,7 @@ const ManageItems = () => {
             </div>
             <div className="overflow-x-auto md:px-20 p-4 mx-auto">
                 <h2 className="text-3xl py-4 font-bold text-[#131313]">Total Order : {menu?.length}</h2>
-                <table className="table">
+                <table className="table table-pin-rows">
                     {/* head */}
                     <thead>
                         <tr className="bg-[#D1A054] text-white">
@@ -84,7 +88,6 @@ const ManageItems = () => {
                             </th>
                         </tr>)}
                     </tbody>
-
                 </table>
             </div>
         </div>
