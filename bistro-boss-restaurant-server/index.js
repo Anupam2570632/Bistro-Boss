@@ -29,6 +29,12 @@ async function run() {
         const paymentCollection = client.db('BISTRO_BOSS').collection('payment')
 
 
+        app.get('/payment/:email', async (req, res) => {
+            const query = { email: req.params.email }
+            const result = await paymentCollection.find(query).toArray();
+            res.send(result)
+        })
+
         app.post('/payment', async (req, res) => {
             const payment = req.body;
 
