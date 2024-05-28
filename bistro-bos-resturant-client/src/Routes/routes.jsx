@@ -16,6 +16,7 @@ import AdminHome from "./pages/Dashboard/AdminHome/AdminHome";
 import AllUsers from "./pages/Dashboard/AllUsers/AllUsers";
 import AdminRoute from "./AddminRoute";
 import Payment from "./pages/Dashboard/Payment/Payment";
+import PaymentHIstory from "./pages/Dashboard/PaymentHistory/PaymentHIstory";
 
 const isAdmin = false;
 
@@ -72,8 +73,12 @@ const router = createBrowserRouter([
                 element: <AdminRoute><AllUsers /></AdminRoute>
             },
             {
-                path:'payment',
-                element:<Payment/>
+                path: 'payment',
+                element: <Payment />
+            },
+            {
+                path: 'paymentHistory',
+                element:<PaymentHIstory/>
             }
         ]
     }
