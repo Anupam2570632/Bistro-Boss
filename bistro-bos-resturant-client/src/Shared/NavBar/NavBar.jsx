@@ -21,12 +21,14 @@ const NavBar = () => {
         <li><NavLink to={'/dashboard'}>DASHBOARD</NavLink></li>
         <li><NavLink to={'/menu'}>OUR MENU</NavLink></li>
         <li><NavLink to={'/shop/salad'}>OUR SHOPS</NavLink></li>
-        <li className="flex relative items-center justify-center text-xl font-bold bg-green-600 text-white rounded-full border-2 border-yellow-400 p-2">
+        {
+            user && <li className="flex relative items-center justify-center text-xl font-bold bg-green-600 text-white rounded-full border-2 border-yellow-400 p-2">
             <Link to={'/dashboard/myCart'}>
                 <BsCart4 />
-                <div className="absolute -right-2 h-6 w-6 text-[12px] flex items-center justify-center -bottom-2 bg-red-600 text-white p-1 rounded-full">{carts.length}</div>
+                <div className="absolute -right-2 h-6 w-6 text-[12px] flex items-center justify-center -bottom-2 bg-red-600 text-white p-1 rounded-full">{carts?.length}</div>
             </Link>
         </li>
+        }
     </>
     return (
         <div className="fixed top-0 z-10 w-full m-0 p-0 bg-black bg-opacity-40">

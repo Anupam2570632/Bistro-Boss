@@ -6,7 +6,7 @@ const useMenu = () => {
 
     const axiosPublic = useAxiosPublic()
 
-    const { isPending, data: menu, refetch } = useQuery({
+    const { isPending, data: menu=[], refetch } = useQuery({
         queryKey: ['menuItem'],
         queryFn: async () => {
             const res = await axiosPublic.get('/menu')

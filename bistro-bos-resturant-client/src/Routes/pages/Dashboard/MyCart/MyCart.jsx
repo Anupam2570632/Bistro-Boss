@@ -3,6 +3,7 @@ import SectionTitle from "../../../../components/SectionTitle";
 import useCart from "../../../../hooks/useCart";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
+import { Link } from "react-router-dom";
 
 const MyCart = () => {
     const [carts, refetch] = useCart()
@@ -28,7 +29,7 @@ const MyCart = () => {
                         title: "Deleted!",
                         text: "Your file has been deleted.",
                         icon: "success",
-                        timer:1500
+                        timer: 1500
                     });
                 }
             }
@@ -43,7 +44,9 @@ const MyCart = () => {
             <div className="flex flex-col md:flex-row gap-3 items-center justify-evenly">
                 <h2 className="text-3xl font-bold text-[#131313]">Total Order : {carts?.length}</h2>
                 <h2 className="text-3xl font-bold text-[#131313]">Total Price : ${totalPrice}</h2>
-                <button className="px-4 py-2 rounded-md bg-[#D1A054] text-white font-bold">PAY</button>
+                <Link to={'/dashboard/payment'}>
+                    <button className="px-4 py-2 rounded-md bg-[#D1A054] text-white font-bold">PAY</button>
+                </Link>
             </div>
             <div className="overflow-x-auto md:px-20 my-6 p-4 mx-auto">
                 <table className="table">

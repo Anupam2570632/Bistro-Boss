@@ -8,13 +8,14 @@ import pizzaBanner from '../../../../assets/menu/pizza-bg.jpg'
 import saladsBanner from '../../../../assets/menu/salad-bg.jpg'
 import soupBanner from '../../../../assets/menu/soup-bg.jpg'
 import MenuCategory from "./MenuCategory/MenuCategory";
+import LoadingPage from "../../../../components/LoadingPage";
 
 
 const TodayOffer = () => {
     const [menu,refetch, isLoading] = useMenu()
 
     if (isLoading) {
-        return <>loading...</>
+        return <LoadingPage/>
     }
 
     const todaysOffer = menu.filter(item => item.category === 'offered')

@@ -7,6 +7,7 @@ import './shop.css'
 import useMenu from '../../../hooks/useMenu';
 import MenuTab from './MenuTab';
 import { useParams } from 'react-router-dom';
+import LoadingPage from '../../../components/LoadingPage';
 
 const Shop = () => {
     let initialIndex;
@@ -22,7 +23,7 @@ const Shop = () => {
 
     const [menu,refetch, isLoading] = useMenu()
     if (isLoading) {
-        return <>loading...</>
+        return <LoadingPage/>
     }
     const drinks = menu.filter(item => item.category === 'drinks')
     const dessert = menu.filter(item => item.category === 'dessert')

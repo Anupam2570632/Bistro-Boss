@@ -22,7 +22,7 @@ const SideBar = () => {
                 <>
                     <li className="text-black"><NavLink end to={'/dashboard'}><FaHouse className="text-2xl" /> User Home</NavLink></li>
                     <li className="text-black"><NavLink end to={'myCart'}><FaCartShopping className="text-2xl" /> My Cart</NavLink></li>
-                    <li className="text-black"><NavLink end to={'reservation'}><FaCalendar /> Reservation</NavLink></li>
+                    <li className="text-black"><NavLink end to={'payment'}><FaCalendar /> Reservation</NavLink></li>
                     <li className="text-black"><NavLink end to={'reservation'}><FaRegMoneyBill1 className="text-2xl" /> Payment History</NavLink></li>
                     <li className="text-black"><NavLink end to={'review'}><FaRankingStar className="text-2xl" /> add review</NavLink></li>
                     <li className="text-black"><NavLink end to={'review'}><FaRegCalendar className="text-2xl" /> My Booking</NavLink></li>

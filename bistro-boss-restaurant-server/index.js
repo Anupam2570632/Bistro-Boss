@@ -2,6 +2,7 @@ const express = require('express')
 const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 const cors = require('cors')
 require('dotenv').config();
+const stripe = require('stripe')(process.env.STRPIE_secret_key)
 const port = process.env.PORT || 5000;
 
 const app = express()
@@ -25,6 +26,26 @@ async function run() {
         const menuCollection = client.db('BISTRO_BOSS').collection('menu')
         const cartCollection = client.db('BISTRO_BOSS').collection('carts')
         const userCollection = client.db('BISTRO_BOSS').collection('users')
+        const paymentCollection = client.db('BISTRO_BOSS').collection('payment')
+
+
+        app.post('/payment', async (req, res) => {
+            const payment = req.body;
+
+            console.log(payment)
+
+            const paymentResult = await paymentCollection.insertOne(payment)
+            const query = {
+                _id: {
+                    $in: payment.cartIds.map(id => new ObjectId(id))
+                }
+            }
+
+            const deleteResult = await cartCollection.deleteMany(query)
+
+            res.send({ paymentResult, deleteResult })
+
+        })
 
 
         app.get('/users/admin/:email', async (req, res) => {
@@ -37,6 +58,21 @@ async function run() {
                 admin = user?.role === 'admin';
             }
             res.send({ admin });
+        })
+
+        app.post('/create-payment-intent', async (req, res) => {
+            const { price } = req.body;
+            const amount = parseInt(price * 100);
+
+            const paymentIntent = await stripe.paymentIntents.create({
+                amount: amount,
+                currency: 'usd',
+                payment_method_types: ['card']
+            })
+
+            res.send({
+                clientSecret: paymentIntent.client_secret
+            })
         })
 
         app.get('/menu', async (req, res) => {
