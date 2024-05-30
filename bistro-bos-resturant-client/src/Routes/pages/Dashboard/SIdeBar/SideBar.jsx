@@ -11,7 +11,7 @@ const SideBar = () => {
         {
             isAdmin ?
                 <>
-                    <li className="text-black"><NavLink end to={'/dashboard'}><FaHouse className="text-2xl" /> Admin Home</NavLink></li>
+                    <li className="text-black"><NavLink end to={'adminHome'}><FaHouse className="text-2xl" /> Admin Home</NavLink></li>
                     <li className="text-black"><NavLink end to={'addItem'}><FaUtensils className="text-2xl" /> Add Items</NavLink></li>
                     <li className="text-black"><NavLink end to={'manageItem'}><FaBars /> Manage Items</NavLink></li>
                     <li className="text-black"><NavLink end to={'reservation'}><FaBook className="text-2xl" /> Manage Bookings</NavLink></li>
@@ -20,7 +20,7 @@ const SideBar = () => {
                 </>
                 :
                 <>
-                    <li className="text-black"><NavLink end to={'/dashboard'}><FaHouse className="text-2xl" /> User Home</NavLink></li>
+                    <li className="text-black"><NavLink end to={'userHome'}><FaHouse className="text-2xl" /> User Home</NavLink></li>
                     <li className="text-black"><NavLink end to={'myCart'}><FaCartShopping className="text-2xl" /> My Cart</NavLink></li>
                     <li className="text-black"><NavLink end to={'payment'}><FaCalendar /> Reservation</NavLink></li>
                     <li className="text-black"><NavLink end to={'paymentHistory'}><FaRegMoneyBill1 className="text-2xl" /> Payment History</NavLink></li>

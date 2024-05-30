@@ -53,8 +53,12 @@ const router = createBrowserRouter([
         element: <Dashboard />,
         children: [
             {
-                index: 'dashboard',
-                element: <PrivateRoute>{isAdmin ? <AdminHome /> : <DashBoardHome />}</PrivateRoute>
+                path: 'adminHome',
+                element: <AdminRoute><AdminHome /></AdminRoute>
+            },
+            {
+                path: 'userHome',
+                element: <PrivateRoute><DashBoardHome /></PrivateRoute>
             },
             {
                 path: 'myCart',
@@ -78,7 +82,7 @@ const router = createBrowserRouter([
             },
             {
                 path: 'paymentHistory',
-                element:<PaymentHIstory/>
+                element: <PaymentHIstory />
             }
         ]
     }

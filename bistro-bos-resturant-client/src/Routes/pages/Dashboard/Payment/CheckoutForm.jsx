@@ -77,7 +77,7 @@ const CheckoutForm = () => {
                     email: user?.email,
                     price: totalPrice,
                     transactionId: paymentIntent.id,
-                    date: new Date,
+                    date: new Date(),
                     cartIds: carts.map(item => item._id),
                     menuItemIds: carts.map(item => item.menuId),
                     status: 'pending'

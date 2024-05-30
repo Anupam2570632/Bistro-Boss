@@ -28,13 +28,19 @@ async function run() {
         const userCollection = client.db('BISTRO_BOSS').collection('users')
         const paymentCollection = client.db('BISTRO_BOSS').collection('payment')
 
-
+        //payment related api
         app.get('/payment/:email', async (req, res) => {
             const query = { email: req.params.email }
             const result = await paymentCollection.find(query).toArray();
             res.send(result)
         })
 
+        app.get('/payment', async (req, res) => {
+            const result = await paymentCollection.find().toArray();
+            res.send(result)
+        })
+
+        //payment intent
         app.post('/payment', async (req, res) => {
             const payment = req.body;
 
@@ -53,7 +59,97 @@ async function run() {
 
         })
 
+        //user-stats
+        app.get('/admin-stats', async (req, res) => {
+            const users = await userCollection.estimatedDocumentCount();
+            const menuItems = await menuCollection.estimatedDocumentCount();
+            const orders = await paymentCollection.estimatedDocumentCount();
 
+            //this is not the best way to do this
+            // const payments = await paymentCollection.find().toArray();
+            // const revenue = payments.reduce((total, payment) => total + payment.price, 0)
+
+            const result = await paymentCollection.aggregate([
+                {
+                    $group: {
+                        _id: null,
+                        totalRevenue: {
+                            $sum: '$price'
+                        }
+                    }
+                }
+            ]).toArray();
+
+            const revenue = result.length > 0 ? result[0].totalRevenue : 0;
+
+            res.send({
+                users,
+                menuItems,
+                orders,
+                revenue
+            })
+        })
+
+        //order-stats
+        app.get('/order-stats', async (req, res) => {
+            const result = await paymentCollection.aggregate([
+                {
+                    $unwind: {
+                        path: '$menuItemIds',
+                        preserveNullAndEmptyArrays: true
+                    }
+                },
+                {
+                    $lookup: {
+                        from: 'menu',
+                        localField: 'menuItemIds',
+                        foreignField: '_id',
+                        as: 'menuItems'
+                    }
+                },
+                {
+                    $unwind: {
+                        path: '$menuItems',
+                        preserveNullAndEmptyArrays: true
+                    }
+                },
+                {
+                    $addFields: {
+                        menuItemId: { $toObjectId: '$menuItemIds' }
+                    }
+                },
+                {
+                    $lookup: {
+                        from: 'menu',
+                        localField: 'menuItemId',
+                        foreignField: '_id',
+                        as: 'menuItems'
+                    }
+                },
+                {
+                    $unwind: {
+                        path: '$menuItems',
+                        preserveNullAndEmptyArrays: true
+                    }
+                },
+                {
+                    $group: {
+                        _id: '$menuItems.category',
+                        quantity: {
+                            $sum: 1
+                        },
+                        revenue:{
+                            $sum:'$menuItems.price'
+                        }
+                    }
+                }
+            ]).toArray();
+
+            res.send(result)
+        })
+
+
+        //web api
         app.get('/users/admin/:email', async (req, res) => {
             const email = req.params.email;
 

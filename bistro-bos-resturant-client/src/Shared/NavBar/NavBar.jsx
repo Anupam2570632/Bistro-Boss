@@ -4,6 +4,7 @@ import { useContext } from "react";
 import { AuthContext } from "../../Provider/AuthProvider/AuthProvider";
 import { BsCart4 } from "react-icons/bs";
 import useCart from "../../hooks/useCart";
+import useAdmin from "../../hooks/useAdmin";
 
 const NavBar = () => {
     const { user, logOut } = useContext(AuthContext)
@@ -15,19 +16,30 @@ const NavBar = () => {
             .catch()
     }
 
+    const [isAdmin] = useAdmin()
+
     const links = <>
         <li><NavLink to={'/'}>HOME</NavLink></li>
         <li><NavLink to={'/contact'}>CONTACT US</NavLink></li>
-        <li><NavLink to={'/dashboard'}>DASHBOARD</NavLink></li>
+        {
+            user && isAdmin &&
+            <li><NavLink to={'/dashboard/adminHome'}>DASHBOARD</NavLink></li>
+
+        }
+        {
+            user && !isAdmin &&
+            <li><NavLink to={'/dashboard/userHome'}>DASHBOARD</NavLink></li>
+
+        }
         <li><NavLink to={'/menu'}>OUR MENU</NavLink></li>
         <li><NavLink to={'/shop/salad'}>OUR SHOPS</NavLink></li>
         {
             user && <li className="flex relative items-center justify-center text-xl font-bold bg-green-600 text-white rounded-full border-2 border-yellow-400 p-2">
-            <Link to={'/dashboard/myCart'}>
-                <BsCart4 />
-                <div className="absolute -right-2 h-6 w-6 text-[12px] flex items-center justify-center -bottom-2 bg-red-600 text-white p-1 rounded-full">{carts?.length}</div>
-            </Link>
-        </li>
+                <Link to={'/dashboard/myCart'}>
+                    <BsCart4 />
+                    <div className="absolute -right-2 h-6 w-6 text-[12px] flex items-center justify-center -bottom-2 bg-red-600 text-white p-1 rounded-full">{carts?.length}</div>
+                </Link>
+            </li>
         }
     </>
     return (
